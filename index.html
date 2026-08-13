@@ -204,6 +204,8 @@
   @keyframes pop{0%{transform:scale(1)}40%{transform:scale(1.16)}100%{transform:scale(1)}}
   @keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-9px)}40%{transform:translateX(9px)}60%{transform:translateX(-6px)}80%{transform:translateX(6px)}}
   .cheer{min-height:24px;font-family:var(--font-mono);font-weight:700;font-size:14px;letter-spacing:.5px;text-align:center;color:var(--yellow);text-shadow:0 0 14px rgba(255,210,63,.5)}
+  .mic{min-height:18px;font-family:var(--font-mono);font-weight:700;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--cyan)}
+  .mic.live{color:var(--pink);animation:pulse 1s infinite}
 
   /* ---------- number pad ---------- */
   .pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
@@ -285,6 +287,7 @@
         <button class="btn ghost" id="btnPractice">Warm Up (No Timer)</button>
         <button class="btn ghost" id="btnReview">Drill My Tricky Facts</button>
         <button class="btn ghost" id="btnSound">Sound: On</button>
+        <button class="btn ghost" id="btnVoice">🎤 Speak Answers: Off</button>
       </div>
 
       <div class="best" id="bestLine">Best: — correct</div>
@@ -315,6 +318,7 @@
       <div class="problem" id="problem"><span id="pa">7</span><span class="x">×</span><span id="pb">8</span></div>
       <div class="answer" id="answer"><span class="caret"></span></div>
       <div class="cheer" id="cheer"></div>
+      <div class="mic" id="micStatus" hidden>🎤 Listening…</div>
     </div>
 
     <div class="pad" id="pad">
@@ -425,7 +429,7 @@
   function newState(mode){
     return {mode, typed:'', correct:0, attempts:0, streak:0, best:0,
       timeLeft:RACE_SECONDS, timerId:null, startMs:0, locked:false,
-      cur:null, lastKey:'', graduated:0, reviewTotal:0};
+      cur:null, lastKey:'', graduated:0, reviewTotal:0, voiceWrong:0};
   }
 
   // ---------- problem generation ----------
@@ -517,7 +521,7 @@
     S.cur=pickProblem();
     if(!S.cur){ endGame('review-clear'); return; }
     S.typed=''; S.locked=false; S.cur.shownAt=Date.now();
-    S.lastKey=S.cur.key;
+    S.lastKey=S.cur.key; S.voiceWrong=0;
     renderProblem();
   }
 
@@ -601,6 +605,7 @@
     show('game');
     sfx.start();
     next(); renderStats();
+    if(voiceOn) startListening();
   }
 
   function stopTimer(){ if(S&&S.timerId){ clearInterval(S.timerId); S.timerId=null; } }
@@ -608,6 +613,7 @@
   function endGame(reason){
     if(!S) return;
     stopTimer();
+    stopListening();
     const st=S; S._ended=true;
     // best (race only)
     let isNewBest=false, reached=(reason==='goal');
@@ -690,6 +696,99 @@
     }
   }
 
+  // ---------- voice input (speak the answers) ----------
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const voiceSupported = !!SR;
+  let voiceOn = voiceSupported && LS.get('tts_voice',false);
+  let rec=null, wantListen=false, micError=false;
+  const micEl=$('#micStatus');
+
+  const SMALL={zero:0,oh:0,o:0,nil:0,one:1,won:1,two:2,to:2,too:2,three:3,four:4,for:4,fore:4,
+    five:5,six:6,seven:7,eight:8,ate:8,nine:9,ten:10,eleven:11,twelve:12,thirteen:13,fourteen:14,
+    fifteen:15,sixteen:16,seventeen:17,eighteen:18,nineteen:19};
+  const TENS={twenty:20,thirty:30,forty:40,fourty:40,fifty:50,sixty:60,seventy:70,eighty:80,ninety:90};
+
+  // "fifty six" / "56" / "one hundred forty four" -> number (or null)
+  function wordsToNumber(str){
+    const toks=str.toLowerCase().replace(/-/g,' ').replace(/[^a-z0-9 ]/g,' ').split(/\s+/).filter(Boolean);
+    let current=0, matched=false;
+    for(const t of toks){
+      if(/^\d+$/.test(t)){ current+=parseInt(t,10); matched=true; }
+      else if(t==='hundred'){ current=(current||1)*100; matched=true; }
+      else if(t==='and'){ /* skip */ }
+      else if(SMALL[t]!=null){ current+=SMALL[t]; matched=true; }
+      else if(TENS[t]!=null){ current+=TENS[t]; matched=true; }
+    }
+    return matched? current : null;
+  }
+  function heardNumbers(transcript){
+    const out=[];
+    const digits=transcript.match(/\d+/g);
+    if(digits) digits.forEach(d=>out.push(parseInt(d,10)));
+    const w=wordsToNumber(transcript);
+    if(w!=null) out.push(w);
+    return out.filter(n=>n>=0 && n<=200);
+  }
+
+  function setMic(on){
+    if(!micEl) return;
+    if(on){ micError=false; micEl.hidden=false; micEl.textContent='🎤 Listening…'; micEl.classList.add('live'); }
+    else{ micEl.classList.remove('live'); if(!micError) micEl.hidden=true; }
+  }
+
+  function startListening(){
+    if(!voiceOn || !voiceSupported) return;
+    wantListen=true; micError=false;
+    if(!rec){
+      rec=new SR();
+      rec.lang='en-US'; rec.continuous=true; rec.interimResults=true; rec.maxAlternatives=5;
+      rec.onresult=onVoice;
+      rec.onerror=onVoiceErr;
+      rec.onend=function(){ if(wantListen){ try{ rec.start(); }catch(e){} } else setMic(false); };
+    }
+    try{ rec.start(); setMic(true); }catch(e){ /* already running */ }
+  }
+  function stopListening(){
+    wantListen=false; micError=false;
+    if(rec){ try{ rec.stop(); }catch(e){} }
+    setMic(false);
+  }
+  function primeMic(){ // pre-request mic permission when toggled on, so in-game start is smooth
+    try{ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
+      navigator.mediaDevices.getUserMedia({audio:true}).then(function(s){ s.getTracks().forEach(t=>t.stop()); }).catch(function(){});
+    }}catch(e){}
+  }
+
+  function onVoiceErr(e){
+    const err=e&&e.error;
+    if(err==='no-speech'||err==='aborted') return;   // benign; onend handles it
+    wantListen=false; micError=true;
+    if(micEl){ micEl.classList.remove('live'); micEl.hidden=false;
+      micEl.textContent=(err==='not-allowed'||err==='service-not-allowed')
+        ? '🎤 Mic blocked — you can still type'
+        : '🎤 Voice unavailable — you can still type'; }
+  }
+
+  function onVoice(e){
+    if(!S || S.locked) return;
+    const cands=new Set(); let hasFinal=false;
+    for(let i=e.resultIndex;i<e.results.length;i++){
+      const res=e.results[i];
+      if(res.isFinal) hasFinal=true;
+      for(let j=0;j<res.length;j++) heardNumbers(res[j].transcript).forEach(n=>cands.add(n));
+    }
+    if(cands.has(S.cur.product)){ voiceCorrect(); return; }
+    if(cands.size && S.typed===''){ el.answer.className='answer'; el.answer.textContent=String([...cands][0]); }
+    if(hasFinal && cands.size){ voiceWrong([...cands][0]); }
+  }
+  function voiceCorrect(){ S.typed=String(S.cur.product); correctAnswer(); }
+  function voiceWrong(n){
+    if(S.locked) return;
+    S.voiceWrong=(S.voiceWrong||0)+1;
+    if(S.voiceWrong>=2){ S.typed=''; wrongAnswer(); }          // give the answer after 2 misses
+    else{ el.answer.className='answer'; S.typed=''; renderAnswer(); setCheer('Heard "'+n+'" — try again 🎤'); }
+  }
+
   // ---------- home / labels ----------
   function refreshHome(){
     const parts=['Best: <b>'+best.count+'</b> correct'];
@@ -699,6 +798,9 @@
     if(n>0){ rb.disabled=false; rb.innerHTML='Drill My Tricky Facts <small>('+n+')</small>'; }
     else{ rb.disabled=true; rb.innerHTML='No Tricky Facts Yet 🎉'; }
     $('#btnSound').textContent='Sound: '+(soundOn?'On':'Off');
+    const vb=$('#btnVoice');
+    if(!voiceSupported){ vb.disabled=true; vb.textContent='🎤 Voice Not Available Here'; }
+    else{ vb.disabled=false; vb.textContent='🎤 Speak Answers: '+(voiceOn?'On':'Off'); }
   }
 
   // ---------- events ----------
@@ -706,8 +808,9 @@
   $('#btnPractice').addEventListener('click',()=>startGame('practice'));
   $('#btnReview').addEventListener('click',()=>{ if(trickyList().length) startGame('review'); });
   $('#btnSound').addEventListener('click',()=>{ soundOn=!soundOn; LS.set('tts_sound',soundOn); refreshHome(); if(soundOn){ac();sfx.correct();} });
+  $('#btnVoice').addEventListener('click',()=>{ if(!voiceSupported) return; voiceOn=!voiceOn; LS.set('tts_voice',voiceOn); refreshHome(); if(voiceOn) primeMic(); });
 
-  $('#btnQuit').addEventListener('click',()=>{ stopTimer(); S=null; refreshHome(); show('home'); });
+  $('#btnQuit').addEventListener('click',()=>{ stopTimer(); stopListening(); S=null; refreshHome(); show('home'); });
   $('#btnFinish').addEventListener('click',()=>{ if(S) endGame(S.mode==='review'?'review-stop':'practice-stop'); });
 
   $('#btnAgain').addEventListener('click',()=>{ startGame(lastMode); });
