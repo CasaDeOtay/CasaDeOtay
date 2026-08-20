@@ -1,0 +1,55 @@
+{
+  "artboards": [
+    {
+      "file": "Main.dc.html",
+      "x": 0,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Sunday check-in"
+    },
+    {
+      "file": "NeedsYou.dc.html",
+      "x": 470,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Needs you"
+    },
+    {
+      "file": "Snack.dc.html",
+      "x": 940,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Snack duty"
+    },
+    {
+      "file": "Change.dc.html",
+      "x": 1410,
+      "y": 0,
+      "w": 390,
+      "h": 844,
+      "title": "Mid-season change"
+    }
+  ],
+  "annotations": [
+    {
+      "id": "held-row",
+      "x": 470,
+      "y": -150,
+      "w": 390,
+      "text": "The parked row you asked for.\nUnconfirmed, visible, off the calendar until she answers \u2014 never silently dropped."
+    },
+    {
+      "id": "authority",
+      "x": 1410,
+      "y": -150,
+      "w": 390,
+      "text": "Facts it changed itself, up top.\nThe two things that are hers to decide, below the heavy rule."
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  }
+}
