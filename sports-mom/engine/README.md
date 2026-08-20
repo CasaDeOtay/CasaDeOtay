@@ -15,7 +15,7 @@ re-pastes anything.
 | `state.schema.json` | App → engine. The season state sent at the top of every turn. |
 | `payload.schema.json` | Engine → app. The envelope returned by every turn. |
 | `examples/inbound-state.json` | A real state block, mid-season, with an answered question waiting. |
-| `examples/*.json` | Five turns: revised schedule photo, Sunday check-in, coach note, mid-season division move, 8pm emergency. |
+| `examples/*.json` | Six turns: revised schedule photo, Sunday check-in, coach note, mid-season division move, confirming a held event, 8pm emergency. |
 | `parse-payload.mjs` | Dependency-free extractor, validator, and state folder, with a self-test. `node parse-payload.mjs`. |
 
 ## The loop
@@ -78,6 +78,28 @@ claim to have saved something when there's nowhere to save it.
 retired and added, event index updated. A payload whose revision doesn't follow
 your state throws a conflict rather than overwriting a turn you missed.
 
+## The holding area
+
+A creased schedule photo produces a row nobody can read. Guessing puts a wrong
+game on her calendar; dropping it means she finds out on a Saturday morning.
+Neither is acceptable, so it goes in `unconfirmed_events` — visible, obviously
+unconfirmed, and never written to the calendar.
+
+The engine emits it `confidence: "low"`, `calendar_action: "none"`, with a
+`needs_input` entry whose `blocks` names the `event_id`. `applyPayload` parks it
+with the question attached and stamps `first_seen` / `last_seen`, so a re-sent
+photo refreshes the row instead of stacking another copy.
+
+It leaves only when the engine re-emits the **same `event_id`** at high
+confidence: with a real time once she clarifies, or `change: "canceled"` if it
+was never a thing — which tombstones it so the next photo of the same crease
+doesn't park it all over again.
+
+`pendingConfirmations(state)` gives you the render-ready list: each held event
+with its question text. A row where `stuck: true` is one whose question was
+answered or retired without the event ever coming back — rare, but it means the
+loop dropped a stitch, so surface it and ask again rather than leaving it to rot.
+
 ## Wiring it up
 
 1. Paste `instructions.md` into the Project's custom instructions, over the
@@ -88,6 +110,8 @@ your state throws a conflict rather than overwriting a turn you missed.
    and only ever produces drafts.
 4. On each turn: send `<season_state>` + her input, then
    `applyPayload(state, extractPayload(reply))` and save the result.
+5. Render `pendingConfirmations(state)` somewhere she'll see it — that list is
+   the only place an unreadable schedule row exists.
 
 ## What the app can rely on
 
@@ -103,9 +127,8 @@ These hold on every turn, and `parse-payload.mjs` fails loudly when they don't:
   profile actually changed.
 - **`fires_on` is when she should see it**, not when the thing happens. Snack
   duty for the 12th fires on the 10th. Render off `fires_on`, sort by it.
-- **Low confidence never becomes data.** Anything unreadable off a photo comes
-  back `confidence: "low"`, `calendar_action: "none"`, and a `needs_input` entry
-  naming what it blocks. `applyPayload` keeps it out of the event index too.
+- **Low confidence never becomes data, and never disappears either.** See the
+  holding area below.
 - **`answers[].body` is the only field written for a human.** It's markdown.
   Everything else is for you.
 

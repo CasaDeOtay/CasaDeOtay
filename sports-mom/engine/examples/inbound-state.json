@@ -62,6 +62,7 @@
       "calendar_event_id": "gcal_4d80aa13"
     }
   ],
+  "unconfirmed_events": [],
   "input": {
     "kind": "profile_change",
     "text": "Marcus is moving up to U12 starting 10/5. New coach is Tomas Reyes. Practices go to Monday and Thursday, 6:00 to 7:30.",

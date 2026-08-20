@@ -1,0 +1,55 @@
+{
+  "schema_version": "1.1",
+  "season_id": "marcus-fall-soccer",
+  "state_revision": 12,
+  "as_of": "2026-09-08",
+  "input_kind": "other",
+  "profile": null,
+  "profile_updates": [],
+  "events": [
+    {
+      "event_id": "game-2026-09-19-tbd",
+      "type": "game",
+      "title": "Otay FC at Riverside",
+      "start": "2026-09-19T11:00:00",
+      "end": "2026-09-19T12:30:00",
+      "all_day": false,
+      "timezone": "America/Los_Angeles",
+      "location": "Riverside Sports Park, Field 2",
+      "opponent": "Riverside",
+      "arrival_offset_min": 45,
+      "source": "her answer, 9/8 — the creased row on the 9/6 schedule photo",
+      "change": "added",
+      "previous_start": null,
+      "confidence": "high",
+      "calendar_action": "create",
+      "calendar_written": true,
+      "calendar_event_id": "gcal_71b0dd42",
+      "supersedes": null
+    }
+  ],
+  "alerts": [
+    {
+      "alert_id": "gear-2026-09-19-away",
+      "kind": "gear",
+      "title": "Away game — leave by 10:00",
+      "fires_on": "2026-09-18",
+      "event_date": "2026-09-19",
+      "lead_days": 1,
+      "severity": "info",
+      "body": "Riverside is about 45 minutes out, so arrival is 10:15 for an 11:00 start. White kit, and the cooler — there's no shade on Field 2.",
+      "event_id": "game-2026-09-19-tbd",
+      "list_id": null,
+      "supersedes": null
+    }
+  ],
+  "digest": [],
+  "digest_stats": null,
+  "lists": [],
+  "plans": [],
+  "drills": [],
+  "drafts": [],
+  "answers": [],
+  "needs_input": [],
+  "resolved_questions": ["q-2026-09-06-sept19"]
+}

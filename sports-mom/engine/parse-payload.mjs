@@ -9,6 +9,7 @@
  *   import { extractPayload, applyPayload } from './parse-payload.mjs'
  *   const payload = extractPayload(reply)        // throws PayloadError on anything odd
  *   const next    = applyPayload(state, payload) // the state to save
+ *   pendingConfirmations(next)                   // what it couldn't read, held for her
  *
  * No dependencies. Run it directly to check the bundled examples:
  *   node parse-payload.mjs
@@ -207,8 +208,26 @@ export function applyPayload(state, payload) {
     })));
 
   const events = new Map((state.known_events ?? []).map((e) => [e.event_id, { ...e }]));
+  const unconfirmed = new Map((state.unconfirmed_events ?? []).map((e) => [e.event_id, { ...e }]));
+
   for (const e of payload.events ?? []) {
-    if (e.confidence === 'low') continue;              // never index a guess
+    if (e.confidence === 'low') {
+      // A guess never becomes a plan — but it never vanishes either. Park it where
+      // she can see it, next to the question that clears it.
+      const held = unconfirmed.get(e.event_id);
+      unconfirmed.set(e.event_id, {
+        event_id: e.event_id,
+        proposed_start: e.start,
+        title: e.title ?? held?.title ?? null,
+        type: e.type ?? held?.type,
+        source: e.source ?? held?.source ?? null,
+        question_id: questionBlocking(payload, e.event_id) ?? held?.question_id ?? null,
+        first_seen: held?.first_seen ?? payload.as_of,
+        last_seen: payload.as_of,
+      });
+      continue;
+    }
+    unconfirmed.delete(e.event_id);                    // confirmed, or dismissed as a tombstone
     const existing = events.get(e.event_id) ?? { event_id: e.event_id };
     events.set(e.event_id, {
       ...existing,
@@ -219,6 +238,12 @@ export function applyPayload(state, payload) {
     });
   }
 
+  // A parked event whose question got answered without a re-emit would sit there
+  // forever; drop the dangling link so the app can re-ask instead.
+  for (const held of unconfirmed.values()) {
+    if (held.question_id && resolved.has(held.question_id)) held.question_id = null;
+  }
+
   return {
     schema_version: SCHEMA_VERSION,
     state_revision: payload.state_revision ?? state.state_revision,
@@ -226,7 +251,27 @@ export function applyPayload(state, payload) {
     profile: payload.profile ?? state.profile,
     open_questions: openQuestions,
     known_events: [...events.values()],
+    unconfirmed_events: [...unconfirmed.values()],
   };
+}
+
+/** The needs_input entry holding a given id back, if there is one. */
+function questionBlocking(payload, id) {
+  return (payload.needs_input ?? []).find((q) => (q.blocks ?? []).includes(id))?.question_id ?? null;
+}
+
+/**
+ * Everything parked waiting on her, ready to render: each held event paired with
+ * the question that clears it. `question` is null when the engine asked nothing
+ * or she already answered without a re-emit — surface those, they're stuck.
+ */
+export function pendingConfirmations(state) {
+  const asked = new Map((state.open_questions ?? []).map((q) => [q.question_id, q]));
+  return (state.unconfirmed_events ?? []).map((e) => ({
+    ...e,
+    question: asked.get(e.question_id)?.question ?? null,
+    stuck: !asked.has(e.question_id),
+  }));
 }
 
 /** Everything that wants her attention today. */
@@ -271,6 +316,60 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     eq('new questions carried', after.open_questions.length, 2);
     eq('tuesday practice canceled', after.known_events.find((e) => e.event_id === 'practice-2026-09-15-tuesday').canceled, true);
     eq('new practices indexed', after.known_events.length, 4);
+    eq('nothing parked', after.unconfirmed_events.length, 0);
+  });
+
+  // An unreadable row is held where she can see it, not dropped.
+  check('a low-confidence event parks instead of disappearing', () => {
+    const before = {
+      schema_version: '1.1', state_revision: 11, as_of: '2026-09-06',
+      profile: { season_id: 'marcus-fall-soccer', kid: 'Marcus', timezone: 'America/Los_Angeles' },
+      open_questions: [], known_events: [], unconfirmed_events: [],
+    };
+    const after = applyPayload(before, read('schedule-photo.json'));
+    const eq = (label, got, want) => { if (got !== want) throw new Error(`${label}: got ${JSON.stringify(got)}, want ${JSON.stringify(want)}`); };
+    eq('confident events indexed', after.known_events.length, 2);
+    eq('the guess stayed out of the index', after.known_events.some((e) => e.event_id === 'game-2026-09-19-tbd'), false);
+    eq('the guess is parked', after.unconfirmed_events.length, 1);
+    const held = after.unconfirmed_events[0];
+    eq('parked with its best read', held.proposed_start, '2026-09-19T09:00:00');
+    eq('parked with its question', held.question_id, 'q-2026-09-06-sept19');
+    eq('first seen', held.first_seen, '2026-09-06');
+
+    const pending = pendingConfirmations(after);
+    eq('renderable', pending[0].question.startsWith('The 9/19 row is creased'), true);
+    eq('not stuck', pending[0].stuck, false);
+
+    // Re-reading the same unclear row refreshes it rather than stacking a copy.
+    const again = applyPayload(after, { ...read('schedule-photo.json'), as_of: '2026-09-07' });
+    eq('no duplicate', again.unconfirmed_events.length, 1);
+    eq('last seen moves', again.unconfirmed_events[0].last_seen, '2026-09-07');
+    eq('first seen holds', again.unconfirmed_events[0].first_seen, '2026-09-06');
+
+    // Her answer releases it into the real calendar.
+    const confirmed = applyPayload(after, read('confirm-parked-event.json'));
+    eq('holding area cleared', confirmed.unconfirmed_events.length, 0);
+    eq('now a real event', confirmed.known_events.find((e) => e.event_id === 'game-2026-09-19-tbd').start, '2026-09-19T11:00:00');
+    eq('question retired', confirmed.open_questions.length, 0);
+  });
+
+  check('a parked event she answered without a re-emit reads as stuck', () => {
+    const before = {
+      schema_version: '1.1', state_revision: 11, as_of: '2026-09-06',
+      profile: { season_id: 'marcus-fall-soccer', kid: 'Marcus', timezone: 'America/Los_Angeles' },
+      open_questions: [], known_events: [], unconfirmed_events: [],
+    };
+    const parked = applyPayload(before, read('schedule-photo.json'));
+    // Question resolved, but the event never came back at high confidence.
+    const orphaned = applyPayload(parked, {
+      ...read('schedule-photo.json'), as_of: '2026-09-08', events: [],
+      alerts: [], needs_input: [], resolved_questions: ['q-2026-09-06-sept19'],
+    });
+    if (orphaned.unconfirmed_events.length !== 1) throw new Error('the held row vanished');
+    const [pending] = pendingConfirmations(orphaned);
+    if (pending.question_id !== null || pending.stuck !== true) {
+      throw new Error('a dangling held row should surface as stuck, not sit there silently');
+    }
   });
 
   check('stale revision is a conflict, not a silent overwrite', () => {
