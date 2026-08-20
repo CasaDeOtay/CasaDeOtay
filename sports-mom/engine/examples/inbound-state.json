@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.1",
+  "state_revision": 15,
+  "as_of": "2026-09-28",
+  "profile": {
+    "season_id": "marcus-fall-soccer",
+    "kid": "Marcus",
+    "sport": "soccer",
+    "team": "Otay FC U11",
+    "division": "U11",
+    "timezone": "America/Los_Angeles",
+    "season_start": "2026-08-24",
+    "last_game": "2026-11-14",
+    "coach": {
+      "name": "Dana Ruiz",
+      "contact": "dana@otayfc.example"
+    },
+    "roster_size": 14,
+    "constraints": [
+      "no dairy (Marcus)",
+      "one vegan kid on the roster",
+      "nut-free field policy"
+    ],
+    "tight_nights": [
+      {
+        "night": "tuesday",
+        "free_from": "19:45",
+        "free_until": "19:45",
+        "note": "between practice and bed, 15 minutes since 9/22"
+      }
+    ],
+    "dreading": "snack duty and the group chat",
+    "stop_thinking_about": [
+      "remembering game times",
+      "re-reading the group chat"
+    ],
+    "default_arrival_offset_min": 30
+  },
+  "open_questions": [
+    {
+      "question_id": "q-2026-09-16-tuesday-window",
+      "question": "Tuesdays are down to 15 minutes after 9/22. Does homework help give, or does bedtime move back?",
+      "answer": "Bedtime moves to 8:15 on practice nights. Homework stays.",
+      "blocks": [
+        "homework-2026-09-22"
+      ]
+    }
+  ],
+  "known_events": [
+    {
+      "event_id": "game-2026-09-12-riverside",
+      "start": "2026-09-12T09:00:00",
+      "type": "game",
+      "canceled": false,
+      "calendar_event_id": "gcal_9f21c7b4"
+    },
+    {
+      "event_id": "practice-2026-09-15-tuesday",
+      "start": "2026-09-15T17:45:00",
+      "type": "practice",
+      "canceled": false,
+      "calendar_event_id": "gcal_4d80aa13"
+    }
+  ],
+  "input": {
+    "kind": "profile_change",
+    "text": "Marcus is moving up to U12 starting 10/5. New coach is Tomas Reyes. Practices go to Monday and Thursday, 6:00 to 7:30.",
+    "attachments": []
+  }
+}

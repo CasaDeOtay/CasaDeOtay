@@ -1,14 +1,52 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "season_id": "marcus-fall-soccer",
+  "state_revision": 15,
   "as_of": "2026-09-16",
   "input_kind": "coach_note",
+  "profile": {
+    "season_id": "marcus-fall-soccer",
+    "kid": "Marcus",
+    "sport": "soccer",
+    "team": "Otay FC U11",
+    "division": "U11",
+    "timezone": "America/Los_Angeles",
+    "season_start": "2026-08-24",
+    "last_game": "2026-11-14",
+    "coach": {
+      "name": "Dana Ruiz",
+      "contact": "dana@otayfc.example"
+    },
+    "roster_size": 14,
+    "constraints": [
+      "no dairy (Marcus)",
+      "one vegan kid on the roster",
+      "nut-free field policy"
+    ],
+    "tight_nights": [
+      {
+        "night": "tuesday",
+        "free_from": "19:45",
+        "free_until": "19:45",
+        "note": "between practice and bed, 15 minutes since 9/22"
+      }
+    ],
+    "dreading": "snack duty and the group chat",
+    "stop_thinking_about": [
+      "remembering game times",
+      "re-reading the group chat"
+    ],
+    "default_arrival_offset_min": 30
+  },
   "profile_updates": [
     {
       "field": "tight_nights[0].free_from",
       "value": "19:45",
       "previous": "19:15",
-      "reason": "Coach moved Tuesday practice 30 minutes later starting 9/22, so the Tuesday window drops from 30 minutes to 15."
+      "reason": "Coach moved Tuesday practice 30 minutes later starting 9/22, so the Tuesday window drops from 30 minutes to 15.",
+      "source": "Coach Dana, group chat 9/16",
+      "applied": true,
+      "authority": "engine"
     }
   ],
   "events": [],
@@ -24,8 +62,14 @@
       "window_start": "19:45",
       "context": "First Tuesday on the later practice. Fifteen minutes, resized from thirty.",
       "blocks": [
-        { "what": "Math — the two problems he flagged, nothing else", "minutes": 10 },
-        { "what": "Sign the reading log and pack the bag", "minutes": 5 }
+        {
+          "what": "Math — the two problems he flagged, nothing else",
+          "minutes": 10
+        },
+        {
+          "what": "Sign the reading log and pack the bag",
+          "minutes": 5
+        }
       ]
     }
   ],
@@ -35,7 +79,11 @@
       "skill": "Weak-foot passing",
       "source": "Coach Dana, 9/16",
       "minutes": 5,
-      "equipment": ["ball", "driveway", "garage door or a wall"],
+      "equipment": [
+        "ball",
+        "driveway",
+        "garage door or a wall"
+      ],
       "steps": [
         "Stand about ten feet off the garage door, ball on his left foot only.",
         "Twenty passes into the door, receiving with the same foot each time.",
@@ -48,7 +96,9 @@
     {
       "draft_id": "draft-2026-09-16-tournament",
       "channel": "email",
-      "to": ["dana@otayfc.example"],
+      "to": [
+        "dana@otayfc.example"
+      ],
       "subject": "Marcus — 10/3 tournament",
       "body": "Hi Dana,\n\nMarcus is in for the 10/3 tournament. We can do both Saturday sessions, and we can take two other kids if anyone needs a ride.\n\nThanks,\n",
       "requires_approval": true,
@@ -61,7 +111,10 @@
       "question_id": "q-2026-09-16-tuesday-window",
       "question": "Tuesdays are down to 15 minutes after 9/22. Does homework help give, or does bedtime move back?",
       "why": "Both are your call, and every Tuesday plan from here depends on the answer.",
-      "blocks": ["homework-2026-09-22"]
+      "blocks": [
+        "homework-2026-09-22"
+      ]
     }
-  ]
+  ],
+  "resolved_questions": []
 }

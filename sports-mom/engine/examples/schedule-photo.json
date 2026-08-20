@@ -1,8 +1,10 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "season_id": "marcus-fall-soccer",
+  "state_revision": 12,
   "as_of": "2026-09-06",
   "input_kind": "schedule_photo",
+  "profile": null,
   "profile_updates": [],
   "events": [
     {
@@ -89,7 +91,10 @@
       "question_id": "q-2026-09-06-sept19",
       "question": "The 9/19 row is creased across the opponent and field — is that the 9am game at Otay, or the away one?",
       "why": "The photo is unreadable there and I will not put a guessed game on your calendar.",
-      "blocks": ["game-2026-09-19-tbd"]
+      "blocks": [
+        "game-2026-09-19-tbd"
+      ]
     }
-  ]
+  ],
+  "resolved_questions": []
 }

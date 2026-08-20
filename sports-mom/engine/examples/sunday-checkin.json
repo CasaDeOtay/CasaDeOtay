@@ -1,8 +1,10 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "season_id": "marcus-fall-soccer",
+  "state_revision": 13,
   "as_of": "2026-09-06",
   "input_kind": "group_chat",
+  "profile": null,
   "profile_updates": [],
   "events": [],
   "alerts": [
@@ -71,20 +73,48 @@
       "dropped": true
     }
   ],
-  "digest_stats": { "messages": 43, "surfaced": 3, "dropped": 40 },
+  "digest_stats": {
+    "messages": 43,
+    "surfaced": 3,
+    "dropped": 40
+  },
   "lists": [
     {
       "list_id": "snack-2026-09-12",
       "purpose": "Snack duty, 9am game vs. Riverside",
       "for_date": "2026-09-12",
       "serves": 16,
-      "constraints": ["no dairy", "nut-free field policy", "one vegan kid"],
+      "constraints": [
+        "no dairy",
+        "nut-free field policy",
+        "one vegan kid"
+      ],
       "items": [
-        { "item": "Clementines", "qty": "4 lb bag", "note": "peel-and-go, nothing to hand out" },
-        { "item": "Pretzel sticks, single-serve", "qty": "18 count", "note": "check the bag says nut-free facility" },
-        { "item": "Sunflower seed butter granola bars", "qty": "2 boxes of 8", "note": "dairy-free and nut-free brand" },
-        { "item": "Water bottles", "qty": "24 pack", "note": null },
-        { "item": "Freezer pops", "qty": "1 box", "note": "9am in September still gets hot" }
+        {
+          "item": "Clementines",
+          "qty": "4 lb bag",
+          "note": "peel-and-go, nothing to hand out"
+        },
+        {
+          "item": "Pretzel sticks, single-serve",
+          "qty": "18 count",
+          "note": "check the bag says nut-free facility"
+        },
+        {
+          "item": "Sunflower seed butter granola bars",
+          "qty": "2 boxes of 8",
+          "note": "dairy-free and nut-free brand"
+        },
+        {
+          "item": "Water bottles",
+          "qty": "24 pack",
+          "note": null
+        },
+        {
+          "item": "Freezer pops",
+          "qty": "1 box",
+          "note": "9am in September still gets hot"
+        }
       ],
       "ready_to_order": true,
       "ordered": false
@@ -98,14 +128,24 @@
       "window_start": "19:15",
       "context": "Tuesday, between practice and bed. This is the whole evening, not a warm-up to one.",
       "blocks": [
-        { "what": "Math worksheet, the six problems he'll actually get stuck on", "minutes": 15 },
-        { "what": "Reading log — read aloud in the car on the way home instead", "minutes": 10 },
-        { "what": "Pack the bag for Wednesday while he brushes teeth", "minutes": 5 }
+        {
+          "what": "Math worksheet, the six problems he'll actually get stuck on",
+          "minutes": 15
+        },
+        {
+          "what": "Reading log — read aloud in the car on the way home instead",
+          "minutes": 10
+        },
+        {
+          "what": "Pack the bag for Wednesday while he brushes teeth",
+          "minutes": 5
+        }
       ]
     }
   ],
   "drills": [],
   "drafts": [],
   "answers": [],
-  "needs_input": []
+  "needs_input": [],
+  "resolved_questions": []
 }

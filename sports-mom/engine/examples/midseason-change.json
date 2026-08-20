@@ -1,0 +1,183 @@
+{
+  "schema_version": "1.1",
+  "season_id": "marcus-fall-soccer",
+  "state_revision": 16,
+  "as_of": "2026-09-28",
+  "input_kind": "profile_change",
+  "profile": {
+    "season_id": "marcus-fall-soccer",
+    "kid": "Marcus",
+    "sport": "soccer",
+    "team": "Otay FC U12",
+    "division": "U12",
+    "timezone": "America/Los_Angeles",
+    "season_start": "2026-08-24",
+    "last_game": "2026-11-14",
+    "coach": { "name": "Tomas Reyes", "contact": null },
+    "roster_size": 14,
+    "constraints": ["no dairy (Marcus)", "one vegan kid on the roster", "nut-free field policy"],
+    "tight_nights": [
+      { "night": "monday", "free_from": "19:45", "free_until": "20:15", "note": "practice 6:00–7:30, home about 7:45, bed 8:15" },
+      { "night": "thursday", "free_from": "19:45", "free_until": "20:15", "note": "practice 6:00–7:30, home about 7:45, bed 8:15" }
+    ],
+    "dreading": "snack duty and the group chat",
+    "stop_thinking_about": ["remembering game times", "re-reading the group chat"],
+    "default_arrival_offset_min": 30
+  },
+  "profile_updates": [
+    {
+      "field": "division",
+      "value": "U12",
+      "previous": "U11",
+      "reason": "Marcus moves up starting 10/5.",
+      "source": "her, 9/28",
+      "applied": true,
+      "authority": "parent"
+    },
+    {
+      "field": "team",
+      "value": "Otay FC U12",
+      "previous": "Otay FC U11",
+      "reason": "Follows the division move.",
+      "source": "her, 9/28",
+      "applied": true,
+      "authority": "parent"
+    },
+    {
+      "field": "coach",
+      "value": { "name": "Tomas Reyes", "contact": null },
+      "previous": { "name": "Dana Ruiz", "contact": "dana@otayfc.example" },
+      "reason": "New coach with the new division. No contact yet, so drafts to him are on hold.",
+      "source": "her, 9/28",
+      "applied": true,
+      "authority": "parent"
+    },
+    {
+      "field": "tight_nights",
+      "value": [
+        { "night": "monday", "free_from": "19:45", "free_until": "20:15", "note": "practice 6:00–7:30, home about 7:45, bed 8:15" },
+        { "night": "thursday", "free_from": "19:45", "free_until": "20:15", "note": "practice 6:00–7:30, home about 7:45, bed 8:15" }
+      ],
+      "previous": [
+        { "night": "tuesday", "free_from": "19:45", "free_until": "19:45", "note": "between practice and bed, 15 minutes since 9/22" }
+      ],
+      "reason": "Practice moves off Tuesday to Monday and Thursday. Windows are 30 minutes using the rule you already gave me — bedtime 8:15 on practice nights, homework stays.",
+      "source": "her, 9/28, plus her answer to q-2026-09-16-tuesday-window",
+      "applied": true,
+      "authority": "parent"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "practice-2026-09-15-tuesday",
+      "type": "practice",
+      "title": "Practice",
+      "start": "2026-10-06T17:45:00",
+      "end": null,
+      "all_day": false,
+      "timezone": "America/Los_Angeles",
+      "location": "Otay FC training field",
+      "opponent": null,
+      "arrival_offset_min": 10,
+      "source": "her, 9/28",
+      "change": "canceled",
+      "previous_start": "2026-09-15T17:45:00",
+      "confidence": "high",
+      "calendar_action": "delete",
+      "calendar_written": true,
+      "calendar_event_id": "gcal_4d80aa13",
+      "supersedes": null
+    },
+    {
+      "event_id": "practice-2026-10-05-monday",
+      "type": "practice",
+      "title": "Practice (U12)",
+      "start": "2026-10-05T18:00:00",
+      "end": "2026-10-05T19:30:00",
+      "all_day": false,
+      "timezone": "America/Los_Angeles",
+      "location": null,
+      "opponent": null,
+      "arrival_offset_min": 10,
+      "source": "her, 9/28",
+      "change": "added",
+      "previous_start": null,
+      "confidence": "high",
+      "calendar_action": "create",
+      "calendar_written": true,
+      "calendar_event_id": "gcal_c103ef77",
+      "supersedes": "practice-2026-09-15-tuesday"
+    },
+    {
+      "event_id": "practice-2026-10-08-thursday",
+      "type": "practice",
+      "title": "Practice (U12)",
+      "start": "2026-10-08T18:00:00",
+      "end": "2026-10-08T19:30:00",
+      "all_day": false,
+      "timezone": "America/Los_Angeles",
+      "location": null,
+      "opponent": null,
+      "arrival_offset_min": 10,
+      "source": "her, 9/28",
+      "change": "added",
+      "previous_start": null,
+      "confidence": "high",
+      "calendar_action": "create",
+      "calendar_written": true,
+      "calendar_event_id": "gcal_c103ef78",
+      "supersedes": null
+    }
+  ],
+  "alerts": [
+    {
+      "alert_id": "schedule-change-2026-09-28-u12",
+      "kind": "schedule_change",
+      "title": "Practices move to Monday and Thursday",
+      "fires_on": "2026-09-28",
+      "event_date": "2026-10-05",
+      "lead_days": 7,
+      "severity": "info",
+      "body": "Tuesday practice is off the calendar from 10/6. Monday and Thursday, 6:00–7:30, are on it from 10/5. Homework nights moved with them.",
+      "event_id": "practice-2026-10-05-monday",
+      "list_id": null,
+      "supersedes": null
+    }
+  ],
+  "digest": [],
+  "digest_stats": null,
+  "lists": [],
+  "plans": [
+    {
+      "plan_id": "homework-2026-10-05",
+      "date": "2026-10-05",
+      "window_min": 30,
+      "window_start": "19:45",
+      "context": "First Monday on the U12 schedule. Back to 30 minutes because bedtime moved to 8:15.",
+      "blocks": [
+        { "what": "Math — the six he'll get stuck on, in the kitchen while he eats", "minutes": 15 },
+        { "what": "Reading log, read aloud", "minutes": 10 },
+        { "what": "Pack Thursday's bag before teeth", "minutes": 5 }
+      ],
+      "supersedes": "homework-2026-09-22"
+    }
+  ],
+  "drills": [],
+  "drafts": [],
+  "answers": [],
+  "needs_input": [
+    {
+      "question_id": "q-2026-09-28-coach-contact",
+      "question": "What's Tomas Reyes's email?",
+      "why": "I can't draft anything to the new coach without it, and the tournament reply is still sitting unsent.",
+      "blocks": ["draft-2026-09-16-tournament"]
+    },
+    {
+      "question_id": "q-2026-09-28-u12-schedule",
+      "question": "Send me the U12 game schedule when it lands — and is 11/14 still the last game for that division?",
+      "why": "Every game after 10/5 is unknown, and end-of-season reminders count back from the last game.",
+      "blocks": []
+    }
+  ],
+  "resolved_questions": ["q-2026-09-16-tuesday-window"]
+}
