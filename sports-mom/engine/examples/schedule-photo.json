@@ -1,0 +1,95 @@
+{
+  "schema_version": "1.0",
+  "season_id": "marcus-fall-soccer",
+  "as_of": "2026-09-06",
+  "input_kind": "schedule_photo",
+  "profile_updates": [],
+  "events": [
+    {
+      "event_id": "game-2026-09-12-riverside",
+      "type": "game",
+      "title": "Otay FC vs. Riverside",
+      "start": "2026-09-12T09:00:00",
+      "end": "2026-09-12T10:30:00",
+      "all_day": false,
+      "timezone": "America/Los_Angeles",
+      "location": "Field 4, Otay Valley Regional Park",
+      "opponent": "Riverside",
+      "arrival_offset_min": 30,
+      "source": "schedule photo 2026-09-06 (revised sheet)",
+      "change": "moved",
+      "previous_start": "2026-09-12T17:30:00",
+      "confidence": "high",
+      "calendar_action": "update",
+      "calendar_written": true,
+      "calendar_event_id": "gcal_9f21c7b4"
+    },
+    {
+      "event_id": "practice-2026-09-15-tuesday",
+      "type": "practice",
+      "title": "Practice",
+      "start": "2026-09-15T17:45:00",
+      "end": "2026-09-15T19:00:00",
+      "all_day": false,
+      "timezone": "America/Los_Angeles",
+      "location": "Otay FC training field",
+      "opponent": null,
+      "arrival_offset_min": 10,
+      "source": "schedule photo 2026-09-06 (revised sheet)",
+      "change": "unchanged",
+      "previous_start": null,
+      "confidence": "high",
+      "calendar_action": "none",
+      "calendar_written": true,
+      "calendar_event_id": "gcal_4d80aa13"
+    },
+    {
+      "event_id": "game-2026-09-19-tbd",
+      "type": "game",
+      "title": "Game — opponent unreadable",
+      "start": "2026-09-19T09:00:00",
+      "end": null,
+      "all_day": false,
+      "timezone": "America/Los_Angeles",
+      "location": null,
+      "opponent": null,
+      "arrival_offset_min": 30,
+      "source": "schedule photo 2026-09-06 (revised sheet), bottom row creased",
+      "change": "added",
+      "previous_start": null,
+      "confidence": "low",
+      "calendar_action": "none",
+      "calendar_written": false,
+      "calendar_event_id": null
+    }
+  ],
+  "alerts": [
+    {
+      "alert_id": "schedule-change-2026-09-12-riverside",
+      "kind": "schedule_change",
+      "title": "Saturday's game moved to the morning",
+      "fires_on": "2026-09-06",
+      "event_date": "2026-09-12",
+      "lead_days": 6,
+      "severity": "action",
+      "body": "Riverside moved from 5:30pm to 9:00am, same field. Calendar is updated. Leaving at 8:30 gets you there for warmups.",
+      "event_id": "game-2026-09-12-riverside",
+      "list_id": null
+    }
+  ],
+  "digest": [],
+  "digest_stats": null,
+  "lists": [],
+  "plans": [],
+  "drills": [],
+  "drafts": [],
+  "answers": [],
+  "needs_input": [
+    {
+      "question_id": "q-2026-09-06-sept19",
+      "question": "The 9/19 row is creased across the opponent and field — is that the 9am game at Otay, or the away one?",
+      "why": "The photo is unreadable there and I will not put a guessed game on your calendar.",
+      "blocks": ["game-2026-09-19-tbd"]
+    }
+  ]
+}

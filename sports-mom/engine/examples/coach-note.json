@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "season_id": "marcus-fall-soccer",
+  "as_of": "2026-09-16",
+  "input_kind": "coach_note",
+  "profile_updates": [
+    {
+      "field": "tight_nights[0].free_from",
+      "value": "19:45",
+      "previous": "19:15",
+      "reason": "Coach moved Tuesday practice 30 minutes later starting 9/22, so the Tuesday window drops from 30 minutes to 15."
+    }
+  ],
+  "events": [],
+  "alerts": [],
+  "digest": [],
+  "digest_stats": null,
+  "lists": [],
+  "plans": [
+    {
+      "plan_id": "homework-2026-09-22",
+      "date": "2026-09-22",
+      "window_min": 15,
+      "window_start": "19:45",
+      "context": "First Tuesday on the later practice. Fifteen minutes, resized from thirty.",
+      "blocks": [
+        { "what": "Math — the two problems he flagged, nothing else", "minutes": 10 },
+        { "what": "Sign the reading log and pack the bag", "minutes": 5 }
+      ]
+    }
+  ],
+  "drills": [
+    {
+      "drill_id": "drill-2026-09-16-weak-foot",
+      "skill": "Weak-foot passing",
+      "source": "Coach Dana, 9/16",
+      "minutes": 5,
+      "equipment": ["ball", "driveway", "garage door or a wall"],
+      "steps": [
+        "Stand about ten feet off the garage door, ball on his left foot only.",
+        "Twenty passes into the door, receiving with the same foot each time.",
+        "Twenty more where he takes one touch to settle it before passing.",
+        "Finish with ten he calls out loud — 'inside', 'laces' — so he's picking the surface, not guessing."
+      ]
+    }
+  ],
+  "drafts": [
+    {
+      "draft_id": "draft-2026-09-16-tournament",
+      "channel": "email",
+      "to": ["dana@otayfc.example"],
+      "subject": "Marcus — 10/3 tournament",
+      "body": "Hi Dana,\n\nMarcus is in for the 10/3 tournament. We can do both Saturday sessions, and we can take two other kids if anyone needs a ride.\n\nThanks,\n",
+      "requires_approval": true,
+      "sent": false
+    }
+  ],
+  "answers": [],
+  "needs_input": [
+    {
+      "question_id": "q-2026-09-16-tuesday-window",
+      "question": "Tuesdays are down to 15 minutes after 9/22. Does homework help give, or does bedtime move back?",
+      "why": "Both are your call, and every Tuesday plan from here depends on the answer.",
+      "blocks": ["homework-2026-09-22"]
+    }
+  ]
+}

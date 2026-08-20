@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0",
+  "season_id": "marcus-fall-soccer",
+  "as_of": "2026-09-06",
+  "input_kind": "group_chat",
+  "profile_updates": [],
+  "events": [],
+  "alerts": [
+    {
+      "alert_id": "snack-2026-09-12",
+      "kind": "snack_duty",
+      "title": "Snack duty — Saturday's game",
+      "fires_on": "2026-09-10",
+      "event_date": "2026-09-12",
+      "lead_days": 2,
+      "severity": "action",
+      "body": "You have snacks for the 9am Riverside game. List is built dairy-free, nut-free, with one vegan kid covered. Fourteen kids plus a couple of siblings.",
+      "event_id": "game-2026-09-12-riverside",
+      "list_id": "snack-2026-09-12"
+    },
+    {
+      "alert_id": "deadline-2026-09-09-team-photos",
+      "kind": "deadline",
+      "title": "Team photo order — Wednesday",
+      "fires_on": "2026-09-08",
+      "event_date": "2026-09-09",
+      "lead_days": 1,
+      "severity": "action",
+      "body": "$28, exact cash or Venmo to Priya. Form goes back Wednesday at practice.",
+      "event_id": null,
+      "list_id": null
+    }
+  ],
+  "digest": [
+    {
+      "summary": "Saturday's game moved to 9am at Field 4. Arrive 8:30 for warmups.",
+      "from": "Coach Dana",
+      "category": "schedule",
+      "action_required": true,
+      "due": "2026-09-12",
+      "dropped": false
+    },
+    {
+      "summary": "Team photo order form and $28 due Wednesday — exact cash or Venmo to Priya.",
+      "from": "Priya (team parent)",
+      "category": "money",
+      "action_required": true,
+      "due": "2026-09-09",
+      "dropped": false
+    },
+    {
+      "summary": "You are on the snack sign-up for 9/12. Nobody has claimed 9/26 yet.",
+      "from": "Snack sign-up thread",
+      "category": "logistics",
+      "action_required": true,
+      "due": "2026-09-12",
+      "dropped": false
+    },
+    {
+      "summary": "31 messages of thumbs-up, photos from last weekend, and 'so proud of these kids'.",
+      "from": null,
+      "category": "social",
+      "action_required": false,
+      "dropped": true
+    },
+    {
+      "summary": "9 messages relitigating whether the ref missed a handball.",
+      "from": null,
+      "category": "noise",
+      "action_required": false,
+      "dropped": true
+    }
+  ],
+  "digest_stats": { "messages": 43, "surfaced": 3, "dropped": 40 },
+  "lists": [
+    {
+      "list_id": "snack-2026-09-12",
+      "purpose": "Snack duty, 9am game vs. Riverside",
+      "for_date": "2026-09-12",
+      "serves": 16,
+      "constraints": ["no dairy", "nut-free field policy", "one vegan kid"],
+      "items": [
+        { "item": "Clementines", "qty": "4 lb bag", "note": "peel-and-go, nothing to hand out" },
+        { "item": "Pretzel sticks, single-serve", "qty": "18 count", "note": "check the bag says nut-free facility" },
+        { "item": "Sunflower seed butter granola bars", "qty": "2 boxes of 8", "note": "dairy-free and nut-free brand" },
+        { "item": "Water bottles", "qty": "24 pack", "note": null },
+        { "item": "Freezer pops", "qty": "1 box", "note": "9am in September still gets hot" }
+      ],
+      "ready_to_order": true,
+      "ordered": false
+    }
+  ],
+  "plans": [
+    {
+      "plan_id": "homework-2026-09-08",
+      "date": "2026-09-08",
+      "window_min": 30,
+      "window_start": "19:15",
+      "context": "Tuesday, between practice and bed. This is the whole evening, not a warm-up to one.",
+      "blocks": [
+        { "what": "Math worksheet, the six problems he'll actually get stuck on", "minutes": 15 },
+        { "what": "Reading log — read aloud in the car on the way home instead", "minutes": 10 },
+        { "what": "Pack the bag for Wednesday while he brushes teeth", "minutes": 5 }
+      ]
+    }
+  ],
+  "drills": [],
+  "drafts": [],
+  "answers": [],
+  "needs_input": []
+}
