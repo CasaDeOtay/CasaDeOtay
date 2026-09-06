@@ -1,0 +1,32 @@
+key: saks
+card_product_key: amex_platinum_consumer_us
+version: 2
+supersedes: saks@1
+status: retired
+display_name: Saks Fifth Avenue credit
+plain_summary: >
+  This credit ended. The last day to use it was June 30, 2026.
+cadence: semiannual
+allowance_cents: 5000
+requires_enrollment: true
+effective_from: 2025-01-01
+effective_to: 2026-06-30
+retired_on: 2026-07-01
+verification: secondary_verified
+terms_verified_on: 2026-09-06
+sources:
+  - https://www.nerdwallet.com/travel/news/amex-platinum-saks-credit
+  - https://thriftytraveler.com/news/credit-card/amex-platinum-drops-saks-credit/
+  - https://www.forbes.com/advisor/credit-cards/amex-ends-saks-credit-best-cards-online-shopping-lmandp5/
+match:
+  patterns:
+    - { kind: prefix, pattern: "SAKS", weight: 0.50 }
+credit:
+  descriptor_tokens: ["SAKS", "STATEMENT CREDIT"]
+  max_lag_days: 90
+notes: >
+  Kept as a tombstone. Historical periods through 2026-06-30 still compute against
+  this rule. The second-half 2026 period was never opened because the benefit was
+  retired before the July 1 boundary, which is exactly the case the period
+  generator has to get right: effective_to cuts off period creation, it does not
+  retroactively void the first-half period.

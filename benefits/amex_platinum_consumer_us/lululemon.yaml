@@ -1,0 +1,28 @@
+key: lululemon
+card_product_key: amex_platinum_consumer_us
+version: 1
+status: active
+display_name: Quarterly lululemon credit
+plain_summary: >
+  Up to $75 back each quarter at lululemon stores in the U.S. and on lululemon.com.
+  Outlet stores do not count. You have to turn this on in your Amex account first.
+cadence: quarterly
+allowance_cents: 7500
+requires_enrollment: true
+enrollment_url: https://www.americanexpress.com/en-us/account/benefits
+effective_from: 2025-10-01
+effective_to: null
+verification: secondary_verified
+terms_verified_on: 2026-09-06
+sources:
+  - https://upgradedpoints.com/news/amex-platinum-lululemon-credit-last-call/
+  - https://thepointsguy.com/credit-cards/top-items-to-buy-amex-platinum-lululemon-credit/
+match:
+  patterns:
+    - { kind: prefix, pattern: "LULULEMON", weight: 0.50 }
+  notes: >
+    Outlet locations are excluded but often post under a descriptor we cannot
+    distinguish from retail. Treat an outlet-looking descriptor as "possible".
+credit:
+  descriptor_tokens: ["LULULEMON", "STATEMENT CREDIT"]
+  max_lag_days: 60

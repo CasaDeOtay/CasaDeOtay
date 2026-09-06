@@ -1,0 +1,39 @@
+key: uber_cash
+card_product_key: amex_platinum_consumer_us
+version: 1
+status: active
+display_name: Monthly Uber Cash
+plain_summary: >
+  $15 in Uber Cash is added to your Uber account each month, plus an extra $20 in
+  December. It works on rides and Uber Eats orders in the U.S. Your Platinum Card
+  has to be added to your Uber account.
+cadence: monthly
+allowance_cents: 1500
+allowance_overrides:
+  - { month: 12, allowance_cents: 3500, note: "December carries the $20 annual bonus" }
+requires_enrollment: false
+effective_from: 2025-09-18
+effective_to: null
+verification: secondary_verified
+terms_verified_on: 2026-09-06
+sources:
+  - https://help.uber.com/en/riders/article/american-express-platinum-card-and-centurion-card-uber-cash-benefit
+  - https://www.forbes.com/advisor/d/american-express-platinum-uber-cash-credit/
+match:
+  exclusive_group: uber
+  patterns:
+    - { kind: prefix, pattern: "UBER TRIP",   weight: 0.50 }
+    - { kind: prefix, pattern: "UBER EATS",   weight: 0.50 }
+    - { kind: exact,  pattern: "UBER",        weight: 0.40 }
+  notes: >
+    This benefit is fundamentally different from the others and the engine must
+    treat it as such. Uber Cash is a balance loaded onto the Uber account, not a
+    statement credit against a purchase. A qualifying ride paid with Uber Cash
+    may produce NO transaction on the card at all, or a reduced one. Absence of a
+    charge is therefore weak evidence of use, not evidence of non-use.
+    See WATCHLIST.md item 3. Until modeled properly this benefit should show
+    "we cannot verify this one automatically" rather than a progress bar.
+credit:
+  descriptor_tokens: ["UBER CASH"]
+  max_lag_days: 30
+  balance_style: true

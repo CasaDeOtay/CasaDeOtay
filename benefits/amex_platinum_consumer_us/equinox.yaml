@@ -1,0 +1,27 @@
+key: equinox
+card_product_key: amex_platinum_consumer_us
+version: 1
+status: active
+display_name: Equinox credit
+plain_summary: >
+  Up to $300 back each calendar year on an Equinox club membership or an Equinox+
+  digital subscription. You have to turn this on in your Amex account first.
+cadence: calendar_year
+allowance_cents: 30000
+requires_enrollment: true
+enrollment_url: https://www.americanexpress.com/en-us/account/benefits
+effective_from: 2025-09-18
+effective_to: null
+verification: secondary_verified
+terms_verified_on: 2026-09-06
+sources:
+  - https://upgradedpoints.com/credit-cards/amex-statement-credits/
+match:
+  patterns:
+    - { kind: prefix, pattern: "EQUINOX", weight: 0.50 }
+  notes: >
+    Sources describe this as an annual cap but some report it disbursing monthly
+    at $25. Cadence is unresolved. See WATCHLIST.md item 2.
+credit:
+  descriptor_tokens: ["EQUINOX", "STATEMENT CREDIT"]
+  max_lag_days: 60

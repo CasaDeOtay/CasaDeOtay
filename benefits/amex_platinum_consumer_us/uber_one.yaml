@@ -1,0 +1,27 @@
+key: uber_one
+card_product_key: amex_platinum_consumer_us
+version: 1
+status: active
+display_name: Uber One membership credit
+plain_summary: >
+  Up to $120 back each calendar year when your auto-renewing Uber One membership
+  is paid with your Platinum Card. You have to turn this on in your Amex account.
+cadence: calendar_year
+allowance_cents: 12000
+requires_enrollment: true
+enrollment_url: https://www.americanexpress.com/en-us/account/benefits
+effective_from: 2025-09-18
+effective_to: null
+verification: secondary_verified
+terms_verified_on: 2026-09-06
+sources:
+  - https://upgradedpoints.com/credit-cards/reviews/american-express-platinum-card/uber-credit/
+match:
+  exclusive_group: uber
+  patterns:
+    - { kind: prefix, pattern: "UBER ONE", weight: 0.50 }
+  amount_max_cents: 1000
+  notes: "Membership charges are small and recurring. Must not collide with uber_cash."
+credit:
+  descriptor_tokens: ["UBER ONE", "STATEMENT CREDIT"]
+  max_lag_days: 45

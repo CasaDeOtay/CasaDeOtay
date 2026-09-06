@@ -1,0 +1,28 @@
+key: oura_ring
+card_product_key: amex_platinum_consumer_us
+version: 1
+status: active
+display_name: Oura Ring credit
+plain_summary: >
+  Up to $200 back each calendar year when you buy an Oura Ring at ouraring.com.
+  It covers the ring itself, not the monthly membership.
+cadence: calendar_year
+allowance_cents: 20000
+requires_enrollment: true
+enrollment_url: https://www.americanexpress.com/en-us/account/benefits
+effective_from: 2025-09-18
+effective_to: null
+verification: secondary_verified
+terms_verified_on: 2026-09-06
+sources:
+  - https://upgradedpoints.com/credit-cards/reviews/american-express-platinum-card/oura-ring-credit/
+match:
+  patterns:
+    - { kind: prefix, pattern: "OURA", weight: 0.50 }
+  amount_min_cents: 20000
+  notes: >
+    Hardware only. The subscription charge is small and recurring and must not
+    match, which the amount floor handles.
+credit:
+  descriptor_tokens: ["OURA", "STATEMENT CREDIT"]
+  max_lag_days: 90

@@ -1,0 +1,42 @@
+key: digital_entertainment
+card_product_key: amex_platinum_consumer_us
+version: 1
+status: active
+display_name: Monthly streaming and news credit
+plain_summary: >
+  Up to $25 back each month when you pay for eligible streaming and news services
+  with your Platinum Card. You have to turn this on in your Amex account first.
+cadence: monthly
+allowance_cents: 2500
+requires_enrollment: true
+enrollment_url: https://www.americanexpress.com/en-us/account/benefits
+effective_from: 2025-09-18
+effective_to: null
+verification: secondary_verified
+terms_verified_on: 2026-09-06
+sources:
+  - https://www.cnbc.com/select/amex-platinum-card-2025-changes/
+  - https://upgradedpoints.com/news/amex-platinum-2025-major-refresh-details/
+match:
+  exclusive_group: streaming
+  patterns:
+    - { kind: exact,  pattern: "DISNEY PLUS",       weight: 0.50 }
+    - { kind: exact,  pattern: "HULU",              weight: 0.50 }
+    - { kind: exact,  pattern: "PEACOCK",           weight: 0.50 }
+    - { kind: exact,  pattern: "PARAMOUNT PLUS",    weight: 0.50 }
+    - { kind: prefix, pattern: "YOUTUBE PREMIUM",   weight: 0.50 }
+    - { kind: prefix, pattern: "YOUTUBE TV",        weight: 0.50 }
+    - { kind: prefix, pattern: "ESPN",              weight: 0.45 }
+    - { kind: prefix, pattern: "NYTIMES",           weight: 0.45 }
+    - { kind: prefix, pattern: "NEW YORK TIMES",    weight: 0.45 }
+    - { kind: prefix, pattern: "WALL STREET JOURNAL", weight: 0.45 }
+    - { kind: prefix, pattern: "WSJ",               weight: 0.40 }
+  amount_max_cents: 2500
+  notes: >
+    Must be purchased direct from the provider. A Disney+ bundle bought through
+    Hulu still qualifies; the same services bought through Amazon Channels or
+    Apple do not, and we cannot tell the difference from the descriptor alone.
+    Cap confidence at "possible" when the descriptor looks like an app-store charge.
+credit:
+  descriptor_tokens: ["DIGITAL ENTERTAINMENT", "STATEMENT CREDIT"]
+  max_lag_days: 45

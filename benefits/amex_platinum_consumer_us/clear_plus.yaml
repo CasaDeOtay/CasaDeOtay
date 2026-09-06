@@ -1,0 +1,34 @@
+key: clear_plus
+card_product_key: amex_platinum_consumer_us
+version: 1
+status: disabled
+display_name: CLEAR Plus credit
+plain_summary: >
+  Back each calendar year toward a CLEAR Plus airport security membership.
+cadence: calendar_year
+allowance_cents: null
+requires_enrollment: false
+effective_from: 2025-09-18
+effective_to: null
+verification: conflicting
+terms_verified_on: 2026-09-06
+sources:
+  - https://cardstack.money/articles/credit-guides/amex-clear-plus-credit-2026
+  - https://upgradedpoints.com/news/clear-plus-membership-price-increase-july-2026/
+  - https://thepointsguy.com/news/american-express-increases-clear-plus-credit
+conflict:
+  field: allowance_cents
+  candidates:
+    - { value_cents: 20900, source: "several 2026 guides" }
+    - { value_cents: 21900, source: "reported increase effective 2026-07-01, tracking the CLEAR+ price rise to $219" }
+  resolution: >
+    DISABLED for matching until resolved against Amex terms. Shipping the wrong
+    number here means telling someone they are covered for $219 when they are
+    covered for $209, and they eat the difference. A disabled benefit that says
+    "we are checking on this" is the correct behavior. See WATCHLIST.md item 1.
+match:
+  patterns:
+    - { kind: prefix, pattern: "CLEAR", weight: 0.50 }
+credit:
+  descriptor_tokens: ["CLEAR", "STATEMENT CREDIT"]
+  max_lag_days: 60

@@ -1,0 +1,32 @@
+key: walmart_plus
+card_product_key: amex_platinum_consumer_us
+version: 1
+status: active
+display_name: Walmart+ membership credit
+plain_summary: >
+  Your monthly Walmart+ membership fee comes back as a credit, about $12.95 a month.
+  Only the monthly plan qualifies, not the annual one.
+cadence: monthly
+allowance_cents: 1295
+requires_enrollment: false
+effective_from: 2025-09-18
+effective_to: null
+verification: secondary_verified
+terms_verified_on: 2026-09-06
+sources:
+  - https://upgradedpoints.com/credit-cards/amex-statement-credits/
+match:
+  patterns:
+    - { kind: prefix, pattern: "WALMART PLUS", weight: 0.50 }
+    - { kind: prefix, pattern: "WALMART+",     weight: 0.50 }
+    - { kind: prefix, pattern: "WM SUPERCENTER", weight: 0.15 }
+  amount_exact_cents: 1295
+  amount_tolerance_cents: 120
+  notes: >
+    The monthly fee is a strong amount signal: an exact 12.95 at a Walmart
+    descriptor is close to unambiguous. Annual plan purchases do NOT qualify and
+    will be a large amount, so the amount predicate also does the exclusion.
+    Amount changes with sales tax in some states, hence the tolerance.
+credit:
+  descriptor_tokens: ["WALMART", "STATEMENT CREDIT"]
+  max_lag_days: 45

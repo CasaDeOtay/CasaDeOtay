@@ -1,0 +1,31 @@
+key: hotel_credit
+card_product_key: amex_platinum_consumer_us
+version: 1
+status: active
+display_name: Semi-annual hotel credit
+plain_summary: >
+  Up to $300 back twice a year on prepaid Fine Hotels + Resorts or The Hotel
+  Collection stays booked through American Express Travel. The Hotel Collection
+  needs a stay of at least two nights.
+cadence: semiannual
+allowance_cents: 30000
+requires_enrollment: false
+effective_from: 2025-09-18
+effective_to: null
+verification: secondary_verified
+terms_verified_on: 2026-09-06
+sources:
+  - https://www.cnbc.com/select/amex-platinum-card-2025-changes/
+  - https://www.kiplinger.com/personal-finance/credit-cards/amex-platinum-card-refresh-worth-it
+match:
+  patterns:
+    - { kind: prefix, pattern: "AMEX TRAVEL",        weight: 0.45 }
+    - { kind: prefix, pattern: "AMERICAN EXPRESS TRAVEL", weight: 0.45 }
+    - { kind: prefix, pattern: "AMEXTRAVEL",         weight: 0.45 }
+  notes: >
+    Booked through Amex Travel but the charge often posts under the property name,
+    not Amex Travel. Same problem as Resy. Prepaid only; pay-at-property bookings
+    do not qualify and look identical to us.
+credit:
+  descriptor_tokens: ["HOTEL CREDIT", "FINE HOTELS", "STATEMENT CREDIT"]
+  max_lag_days: 90
