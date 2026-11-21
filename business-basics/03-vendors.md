@@ -12,7 +12,7 @@ Phone numbers, emails and logins are in the Google Doc "Vendor Contact Info" (Ca
 | Costco Business Delivery | Bulk goods (maple syrup, honey, etc.) | Online | Mon to Thu by 2:30pm for next day. Weekend by 2:30pm for Mon |
 | Jaunt Coffee | Coffee and espresso | Email wholesale or rep | (add) |
 | Holy Matcha | Matcha | Text Sean how many bags | (add) |
-| Metolius Tea Wholesale | Chai (31 oz, case of 6) | Online | Order $500+ for free shipping |
+| (new chai vendor?) | Chai | (add) | (add) |
 | The Spice House | Hot cocoa mix (8 oz bags) | Online | (add) |
 | Querida's Empanadas | Empanadas | Text Amanda | Order Sunday by end of day for weekly delivery |
 | Ripples | Ripple printer supplies | Automatic monthly subscription | Auto |

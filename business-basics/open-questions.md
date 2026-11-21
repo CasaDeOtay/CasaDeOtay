@@ -4,11 +4,12 @@ Answers go back to Claude so the business basics files can be finished. Check of
 
 ## Owners (Daniel and LaTanya)
 
-- [ ] What date did the Casa on Metro Ave open?
-- [ ] Is the chai price right? The doc says $298.07 for 6 x 32 oz. Is that one case or several?
+- [x] What date did the Casa on Metro Ave open? March 5, 2025
+- [x] Is the chai price right? No longer using Metolius.
+- [ ] Who do we buy chai from now, and what does it cost (price and size)?
 - [ ] Reconnect Square in claude.ai connector settings so Claude can pull menu prices and top sellers.
 - [ ] Make the GitHub repo private?
-- [ ] Passwords moved to a password manager, and the Metolius and food paper passwords changed?
+- [ ] Passwords moved to a password manager, and the food paper password changed? (Close or change the old Metolius account too, since it shared that password.)
 
 ## Blake (ordering and vendors)
 

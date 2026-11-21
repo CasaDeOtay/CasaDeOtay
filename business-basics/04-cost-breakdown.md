@@ -15,7 +15,6 @@ Target: keep drink cost under 25% of the menu price.
 | Iced Latte | 16oz | $0.81 | (add) | |
 | Cold Brew | 16oz | $1.65 | (add) | |
 | Matcha Latte | 12oz | $1.78 | (add) | |
-| Chai Latte | 12oz | $8.04 | (add) | |
 
 ## Detail
 
@@ -76,16 +75,6 @@ Target: keep drink cost under 25% of the menu price.
 | hot_lid_12oz | 1 each | $0.037 |  |
 | **Total** | | **$1.78** | |
 
-### Chai Latte, 12oz
-
-| Ingredient | Amount | Cost | Note |
-|---|---|---|---|
-| chai_concentrate | 5 oz | $7.762 | amount is a guess. Confirm |
-| whole_milk | 5 oz | $0.179 |  |
-| hot_cup_12oz | 1 each | $0.065 |  |
-| hot_lid_12oz | 1 each | $0.037 |  |
-| **Total** | | **$8.04** | |
-
 ## Ingredient unit costs
 
 | Ingredient | Cost per unit | Vendor | Last updated | Note |
@@ -102,7 +91,6 @@ Target: keep drink cost under 25% of the menu price.
 | vanilla_extract | $0.8122 / floz |  | 2024-04 |  |
 | maple_syrup | $0.0129 / ml | Costco | 2024-04 | Kirkland organic 1L |
 | honey | $0.2082 / oz | Costco | 2024-04 | 3 x 24 oz |
-| chai_concentrate | $1.5524 / oz | Metolius Tea | 2024-04 | CHECK: $298 for 6 x 32 oz looks high |
 | matcha | $0.3306 / g | Holy Matcha | 2024-04 | 2 lb ceremonial |
 | cold_brew | $0.1531 / oz |  | 2024-04 | 5 gallon |
 | hot_cocoa_mix | $1.1238 / oz | The Spice House | 2024-04 |  |

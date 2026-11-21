@@ -10,7 +10,7 @@
 |---|---|---|
 | Address | 1964 Optima St, Chula Vista, CA | 1665 Metro Ave, Suite 100, Chula Vista, CA |
 | Type | Shipping container | Brick and mortar |
-| Opened | December 2, 2023 | (add date) |
+| Opened | December 2, 2023 | March 5, 2025 |
 | Hours | Mon to Fri 7am to noon. Sat and Sun 8am to noon | Every day 7am to 4pm |
 
 Both shops are in Millenia, a planned community in eastern Chula Vista.
