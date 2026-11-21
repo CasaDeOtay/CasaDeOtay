@@ -1,0 +1,26 @@
+drink,size,ingredient,amount,notes
+Espresso Topo,single,espresso,17,
+Espresso Topo,single,topo_chico,3,
+Hot Latte,12oz,espresso,17,
+Hot Latte,12oz,whole_milk,10,
+Hot Latte,12oz,hot_cup_12oz,1,
+Hot Latte,12oz,hot_lid_12oz,1,
+Hot Latte (oat),12oz,espresso,17,
+Hot Latte (oat),12oz,oat_milk,10,
+Hot Latte (oat),12oz,hot_cup_12oz,1,
+Hot Latte (oat),12oz,hot_lid_12oz,1,
+Iced Latte,16oz,espresso,17,
+Iced Latte,16oz,whole_milk,10,milk amount is a guess. Confirm
+Iced Latte,16oz,cold_cup_16oz,1,
+Iced Latte,16oz,cold_lid_16oz,1,
+Cold Brew,16oz,cold_brew,10,amount is a guess. Confirm
+Cold Brew,16oz,cold_cup_16oz,1,
+Cold Brew,16oz,cold_lid_16oz,1,
+Matcha Latte,12oz,matcha,4,grams of matcha is a guess. Confirm
+Matcha Latte,12oz,whole_milk,10,
+Matcha Latte,12oz,hot_cup_12oz,1,
+Matcha Latte,12oz,hot_lid_12oz,1,
+Chai Latte,12oz,chai_concentrate,5,amount is a guess. Confirm
+Chai Latte,12oz,whole_milk,5,
+Chai Latte,12oz,hot_cup_12oz,1,
+Chai Latte,12oz,hot_lid_12oz,1,

@@ -1,0 +1,27 @@
+ingredient,unit,pack_price,pack_size,vendor,last_updated,notes
+espresso,g,9.00,453.6,Jaunt Coffee,2024-09,PLACEHOLDER $9/lb from old cost sheet. Confirm current Jaunt price
+whole_milk,oz,4.59,128,Challenge Dairy,2024-09,1 gallon
+nonfat_milk,oz,2.85,64,Challenge Dairy,2024-09,half gallon
+half_and_half,oz,2.56,32,Challenge Dairy,2024-09,
+oat_milk,oz,2.92,32,Califia,2024-09,
+almond_milk,oz,2.92,32,Califia Barista,2024-09,
+coconut_milk,oz,2.93,32,,2024-09,
+whipped_cream,oz,3.57,13,,2024-09,
+cane_sugar,g,21.42,11339,Peterson,2024-09,25 lb bag
+vanilla_extract,floz,25.99,32,,2024-04,
+maple_syrup,ml,12.89,1000,Costco,2024-04,Kirkland organic 1L
+honey,oz,14.99,72,Costco,2024-04,3 x 24 oz
+chai_concentrate,oz,298.07,192,Metolius Tea,2024-04,CHECK: $298 for 6 x 32 oz looks high
+matcha,g,299.90,907.2,Holy Matcha,2024-04,2 lb ceremonial
+cold_brew,oz,98.00,640,,2024-04,5 gallon
+hot_cocoa_mix,oz,8.99,8,The Spice House,2024-04,
+topo_chico,floz,0.0909,1,,2024-09,per fl oz from old sheet
+hot_cup_8oz,each,32.79,600,,2024-04,
+hot_cup_12oz,each,38.99,600,,2024-04,
+hot_lid_12oz,each,21.99,600,,2024-04,
+hot_lid_16oz,each,21.99,600,,2024-04,
+cold_cup_12oz,each,39.99,1000,,2024-04,
+cold_cup_16oz,each,39.99,500,Fabri-Kal,2024-04,
+cold_lid_16oz,each,38.89,1000,,2024-04,
+sugar_in_the_raw,each,10.69,500,,2024-04,
+drink_carrier,each,33.99,300,,2024-04,
